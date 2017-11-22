@@ -1,0 +1,28 @@
+{
+  "name": "react-redux-rxjs",
+  "version": "0.1.0",
+  "dependencies": {
+    "bootstrap-sass": "^3.3.7",
+    "react": "^16.1.1",
+    "react-dom": "^16.1.1",
+    "react-scripts": "1.0.17"
+  },
+  "devDependencies": {
+    "eslint": "^4.11.0",
+    "htmlhint": "^0.9.13",
+    "stylelint": "^8.2.0",
+    "stylelint-config-sass-guidelines": "^4.0.1",
+    "stylelint-config-standard": "^17.0.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/narr/react-redux-rxjs.git"
+  },
+  "private": true
+}
