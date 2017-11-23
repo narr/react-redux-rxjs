@@ -63,3 +63,6 @@ typings/
 # General
 tmp
 temp
+
+# production
+/build
