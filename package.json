@@ -2,6 +2,7 @@
   "name": "react-redux-rxjs",
   "version": "0.1.0",
   "dependencies": {
+    "autodll-webpack-plugin": "^0.3.5",
     "autoprefixer": "7.1.6",
     "babel-core": "6.26.0",
     "babel-eslint": "7.2.3",
@@ -58,8 +59,12 @@
   },
   "private": true,
   "jest": {
-    "collectCoverageFrom": ["src/**/*.{js,jsx,mjs}"],
-    "setupFiles": ["<rootDir>/config/polyfills.js"],
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx,mjs}"
+    ],
+    "setupFiles": [
+      "<rootDir>/config/polyfills.js"
+    ],
     "testMatch": [
       "<rootDir>/src/**/__tests__/**/*.{js,jsx,mjs}",
       "<rootDir>/src/**/?(*.)(spec|test).{js,jsx,mjs}"
@@ -69,10 +74,11 @@
     "transform": {
       "^.+\\.(js|jsx|mjs)$": "<rootDir>/node_modules/babel-jest",
       "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
-      "^(?!.*\\.(js|jsx|mjs|css|json)$)":
-        "<rootDir>/config/jest/fileTransform.js"
+      "^(?!.*\\.(js|jsx|mjs|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
     },
-    "transformIgnorePatterns": ["[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs)$"],
+    "transformIgnorePatterns": [
+      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs)$"
+    ],
     "moduleNameMapper": {
       "^react-native$": "react-native-web"
     },
@@ -87,16 +93,22 @@
     ]
   },
   "babel": {
-    "presets": ["react-app"]
+    "presets": [
+      "react-app"
+    ]
   },
   "eslintConfig": {
     "extends": "react-app",
     "rules": {
-      "quotes": [2, "single"]
+      "quotes": [
+        2,
+        "single"
+      ]
     }
   },
   "prettier": {
-    "singleQuote": true
+    "singleQuote": true,
+    "trailingComma": "all"
   },
   "stylelint": {
     "extends": [
@@ -107,7 +119,9 @@
       "selector-type-no-unknown": [
         true,
         {
-          "ignore": ["custom-elements"]
+          "ignore": [
+            "custom-elements"
+          ]
         }
       ],
       "selector-class-pattern": "^[a-zA-Z0-9\\-]+$"
