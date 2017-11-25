@@ -1,3 +1,5 @@
+// @flow
+
 import { jsdom } from 'jsdom';
 import React from 'react';
 import ReactDOM from 'react-dom';

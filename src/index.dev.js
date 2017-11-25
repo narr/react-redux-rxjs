@@ -1,26 +1,40 @@
+// @flow
+
+import './index.css';
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { AppContainer } from 'react-hot-loader';
-import './index.css';
-import App from './App';
+
+import App from './containers/App';
 import registerServiceWorker from './registerServiceWorker';
 
-const render = Component => {
-  ReactDOM.render(
-    <AppContainer>
-      <Component />
-    </AppContainer>,
-    document.getElementById('root'),
-  );
-};
+function init() {
+  const root = document.getElementById('root');
 
-render(App);
+  if (!root) {
+    return;
+  }
 
-// Webpack Hot Module Replacement API
-if (module.hot) {
-  module.hot.accept('./App', () => {
-    render(App);
-  });
+  const render = Component => {
+    ReactDOM.render(
+      <AppContainer>
+        <Component />
+      </AppContainer>,
+      root,
+    );
+  };
+
+  render(App);
+
+  // Webpack Hot Module Replacement API
+  if (module.hot) {
+    module.hot.accept('./containers/App', () => {
+      render(App);
+    });
+  }
 }
+
+init();
 
 registerServiceWorker();
