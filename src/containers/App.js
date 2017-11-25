@@ -1,20 +1,19 @@
 // @flow
 
-import React, { Component } from 'react';
-import logo from 'public/assets/img/logo.svg';
 import './App.scss';
+import logo from 'public/assets/img/logo.svg';
+
+import React, { Component } from 'react';
+
+import AppHeader from '../components/AppHeader';
+import AppIntro from '../components/AppIntro';
 
 class App extends Component<{}> {
   render() {
     return (
       <div className="App">
-        <header className="App-header-test" styleName="App-header">
-          <img src={logo} styleName="App-logo" alt="logo" />
-          <h1 styleName="App-title">Welcome to React</h1>
-        </header>
-        <p styleName="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <AppHeader logo={logo}></AppHeader>
+        <AppIntro></AppIntro>
       </div>
     );
   }

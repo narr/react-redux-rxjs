@@ -17,6 +17,6 @@
 module.name_mapper='.*?\.css$' -> '<PROJECT_ROOT>/flow/stub/empty-module.js'
 module.name_mapper='.*?\.scss$' -> '<PROJECT_ROOT>/flow/stub/empty-module.js'
 module.name_mapper='.*?\.json$' -> '<PROJECT_ROOT>/flow/stub/empty-module.js'
-module.name_mapper='.*?\.svg$' -> '<PROJECT_ROOT>/flow/stub/empty-module.js'
+module.name_mapper='.*?\.svg$' -> '<PROJECT_ROOT>/flow/stub/empty-string.js'
 
 [version]
