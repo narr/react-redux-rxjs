@@ -57,7 +57,11 @@ module.exports = {
   devtool: shouldUseSourceMap ? 'source-map' : false,
   // In production, we only want to load the polyfills and the app code.
   entry: {
-    vendor: [require.resolve('./polyfills'), 'react', 'react-dom'],
+    vendor: [
+      require.resolve('../lib/vendor.scss'),
+      require.resolve('./polyfills'),
+      require.resolve('../lib/vendor'),
+    ],
     bundle: [paths.appIndexJs],
   },
   output: {
@@ -166,7 +170,7 @@ module.exports = {
           // use the "style" loader inside the async code so CSS from them won't be
           // in the main CSS file.
           {
-            test: /\.css$/,
+            test: /\.(css|scss)$/,
             loader: ExtractTextPlugin.extract(
               Object.assign(
                 {
@@ -180,9 +184,10 @@ module.exports = {
                     {
                       loader: require.resolve('css-loader'),
                       options: {
-                        importLoaders: 1,
                         minimize: true,
                         sourceMap: shouldUseSourceMap,
+                        modules: true,
+                        localIdentName: '[local]___[hash:base64:5]',
                       },
                     },
                     {
@@ -204,6 +209,9 @@ module.exports = {
                           }),
                         ],
                       },
+                    },
+                    {
+                      loader: 'sass-loader',
                     },
                   ],
                 },
@@ -256,6 +264,8 @@ module.exports = {
         minifyCSS: true,
         minifyURLs: true,
       },
+      chunksSortMode: 'manual',
+      chunks: ['vendor', 'bundle'],
     }),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
