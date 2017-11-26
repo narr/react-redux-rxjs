@@ -16,6 +16,7 @@ type State = {
     name: string,
     snippet: string,
     hide: boolean,
+    keyId: string,
   }>,
 };
 
@@ -66,13 +67,20 @@ class App extends Component<Props, State> {
     if (newOrderBy === this.state.orderBy) {
       return;
     }
-    const newSortedPhoneList = _.sortBy(this.state.phoneList, phone => {
-      const orderBy = phone[newOrderBy];
-      if (_.isString(orderBy)) {
-        return orderBy.toLowerCase();
-      }
-      return orderBy;
-    });
+    const newSortedPhoneList = _(this.state.phoneList)
+      .sortBy(phone => {
+        const orderBy = phone[newOrderBy];
+        if (_.isString(orderBy)) {
+          return orderBy.toLowerCase();
+        }
+        return orderBy;
+      })
+      .map(phone => {
+        phone.keyId = phone.id + '_sortBy-' + newOrderBy;
+        return phone;
+      })
+      .value();
+
     this.setState({
       orderBy: e.target.value,
       phoneList: newSortedPhoneList,
@@ -96,6 +104,7 @@ class App extends Component<Props, State> {
           console.log(result);
           const phoneList = result.map(phone => {
             phone.imageUrl = 'assets/' + phone.imageUrl;
+            phone.keyId = phone.id;
             return phone;
           });
           this.setState({

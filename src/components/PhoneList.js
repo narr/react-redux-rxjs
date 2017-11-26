@@ -3,6 +3,7 @@
 import './PhoneList.scss';
 
 import React, { PureComponent } from 'react';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 import PhoneListItem from './PhoneListItem';
 
@@ -13,6 +14,7 @@ type Props = {
     name: string,
     snippet: string,
     hide: boolean,
+    keyId: string,
   }>,
   onPhoneClick: (phoneId: string) => void,
 };
@@ -22,18 +24,30 @@ class PhoneList extends PureComponent<Props> {
     console.log('PhoneList render..!!');
     return (
       <ul className="phone-list" styleName="phones">
-        {this.props.phoneList
-          .filter(phone => !phone.hide)
-          .map(phone => (
-            <PhoneListItem
-              key={phone.id}
-              id={phone.id}
-              imageUrl={phone.imageUrl}
-              name={phone.name}
-              snippet={phone.snippet}
-              onPhoneClick={this.props.onPhoneClick}
-            />
+        <TransitionGroup>
+          {this.props.phoneList.filter(phone => !phone.hide).map(phone => (
+            <CSSTransition
+              key={phone.keyId}
+              timeout={500}
+              classNames={{
+                appear: 'phone-list-item--appear',
+                appearActive: 'phone-list-item--active-appear',
+                enter: 'phone-list-item--enter',
+                enterActive: 'phone-list-item--active-enter',
+                exit: 'phone-list-item--exit',
+                exitActive: 'phone-list-item--active-exit',
+              }}
+            >
+              <PhoneListItem
+                id={phone.id}
+                imageUrl={phone.imageUrl}
+                name={phone.name}
+                snippet={phone.snippet}
+                onPhoneClick={this.props.onPhoneClick}
+              />
+            </CSSTransition>
           ))}
+        </TransitionGroup>
       </ul>
     );
   }

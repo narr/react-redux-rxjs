@@ -1,6 +1,6 @@
 .thumbnail {
   clear: both;
-  height: 120px;
+  height: 115px;
   line-height: 1.42857143;
   padding-top: 15px;
 }
@@ -11,4 +11,32 @@
   margin: -0.5em 1em 1.5em 0;
   padding-bottom: 1em;
   width: 100px;
+}
+
+:global {
+  // animation
+  .phone-list-item--enter {
+    height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: 0.5s linear all;
+  }
+
+  .phone-list-item--active-enter {
+    height: 115px;
+    opacity: 1;
+  }
+
+  .phone-list-item--exit {
+    opacity: 1;
+    overflow: hidden;
+    transition: 0.5s linear all;
+  }
+
+  .phone-list-item--active-exit {
+    height: 0;
+    opacity: 0;
+    padding-bottom: 0;
+    padding-top: 0;
+  }
 }
