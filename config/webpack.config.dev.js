@@ -1,6 +1,5 @@
 'use strict';
 
-const autoprefixer = require('autoprefixer');
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -12,6 +11,7 @@ const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
 const getClientEnvironment = require('./env');
 const paths = require('./paths');
 const AutoDllPlugin = require('autodll-webpack-plugin');
+const loaderUtils = require('./loaderUtils');
 
 // Webpack uses `publicPath` to determine where the app is being served from.
 // In development, we always serve from the root. This makes config easier.
@@ -153,58 +153,14 @@ module.exports = {
               plugins: ['react-hot-loader/babel'],
             },
           },
-          // "postcss" loader applies autoprefixer to our CSS.
-          // "css" loader resolves paths in CSS and adds assets as dependencies.
-          // "style" loader turns CSS into JS modules that inject <style> tags.
-          // In production, we use a plugin to extract that CSS to a file, but
-          // in development "style" loader enables hot editing of CSS.
           {
             test: /\.(css|scss)$/,
-            use: [
-              {
-                loader: require.resolve('style-loader'),
-                options: {
-                  // when style loader is used with { options: { sourceMap: true } } option,
-                  // the CSS modules will be generated as Blobs
-                  sourceMap: true,
-                },
-              },
-              {
-                loader: require.resolve('css-loader'),
-                options: {
-                  sourceMap: true,
-                  modules: true,
-                  localIdentName: '[local]___[hash:base64:5]',
-                },
-              },
-              {
-                loader: require.resolve('postcss-loader'),
-                options: {
-                  // Necessary for external CSS imports to work
-                  // https://github.com/facebookincubator/create-react-app/issues/2677
-                  ident: 'postcss',
-                  plugins: () => [
-                    require('postcss-flexbugs-fixes'),
-                    autoprefixer({
-                      browsers: [
-                        '>1%',
-                        'last 4 versions',
-                        'Firefox ESR',
-                        'not ie < 9', // React doesn't support IE8 anyway
-                      ],
-                      flexbox: 'no-2009',
-                    }),
-                  ],
-                  sourceMap: true,
-                },
-              },
-              {
-                loader: 'sass-loader',
-                options: {
-                  sourceMap: true,
-                },
-              },
-            ],
+            include: [path.join(paths.rootPath, 'lib/vendor.scss')],
+            use: loaderUtils.cssLoader.dev(true),
+          },
+          {
+            test: /\.(css|scss)$/,
+            use: loaderUtils.cssLoader.dev(),
           },
           // "file" loader makes sure those assets get served by WebpackDevServer.
           // When you `import` an asset, you get its (virtual) filename.

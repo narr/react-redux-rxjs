@@ -1,6 +1,5 @@
 'use strict';
 
-const autoprefixer = require('autoprefixer');
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -12,6 +11,7 @@ const eslintFormatter = require('react-dev-utils/eslintFormatter');
 const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
 const paths = require('./paths');
 const getClientEnvironment = require('./env');
+const loaderUtils = require('./loaderUtils');
 
 // Webpack uses `publicPath` to determine where the app is being served from.
 // It requires a trailing slash, or the file assets will get an incorrect path.
@@ -171,6 +171,7 @@ module.exports = {
           // in the main CSS file.
           {
             test: /\.(css|scss)$/,
+            include: [path.join(paths.rootPath, 'lib/vendor.scss')],
             loader: ExtractTextPlugin.extract(
               Object.assign(
                 {
@@ -180,40 +181,25 @@ module.exports = {
                       hmr: false,
                     },
                   },
-                  use: [
-                    {
-                      loader: require.resolve('css-loader'),
-                      options: {
-                        minimize: true,
-                        sourceMap: shouldUseSourceMap,
-                        modules: true,
-                        localIdentName: '[local]___[hash:base64:5]',
-                      },
+                  use: loaderUtils.cssLoader.prod(shouldUseSourceMap, true),
+                },
+                extractTextPluginOptions,
+              ),
+            ),
+            // Note: this won't work without `new ExtractTextPlugin()` in `plugins`.
+          },
+          {
+            test: /\.(css|scss)$/,
+            loader: ExtractTextPlugin.extract(
+              Object.assign(
+                {
+                  fallback: {
+                    loader: require.resolve('style-loader'),
+                    options: {
+                      hmr: false,
                     },
-                    {
-                      loader: require.resolve('postcss-loader'),
-                      options: {
-                        // Necessary for external CSS imports to work
-                        // https://github.com/facebookincubator/create-react-app/issues/2677
-                        ident: 'postcss',
-                        plugins: () => [
-                          require('postcss-flexbugs-fixes'),
-                          autoprefixer({
-                            browsers: [
-                              '>1%',
-                              'last 4 versions',
-                              'Firefox ESR',
-                              'not ie < 9', // React doesn't support IE8 anyway
-                            ],
-                            flexbox: 'no-2009',
-                          }),
-                        ],
-                      },
-                    },
-                    {
-                      loader: 'sass-loader',
-                    },
-                  ],
+                  },
+                  use: loaderUtils.cssLoader.prod(shouldUseSourceMap),
                 },
                 extractTextPluginOptions,
               ),
