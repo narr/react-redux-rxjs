@@ -1,0 +1,22 @@
+{
+  "name": "react-redux-rxjs-components",
+  "version": "0.1.1",
+  "description": "react-redux-rxjs components",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/narr/react-redux-rxjs.git"
+  },
+  "author": "https://github.com/narr",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/narr/react-redux-rxjs/issues"
+  },
+  "homepage": "https://github.com/narr/react-redux-rxjs/tree/master/packages/components/README.md",
+  "peerDependencies": {
+    "@material-ui/core": "^1.4.2",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
+    "styled-components": "^3.3.3"
+  },
+  "main": "./dist"
+}

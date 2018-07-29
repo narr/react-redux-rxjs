@@ -15,4 +15,5 @@ max_line_length = 0
 trim_trailing_whitespace = false
 
 [COMMIT_EDITMSG]
+# Don't wrap lines for Git commit messages
 max_line_length = 0
