@@ -1,0 +1,16 @@
+{
+  "extends": [
+    "tslint:recommended",
+    "tslint-react",
+    "tslint-config-prettier",
+    "tslint-plugin-prettier"
+  ],
+  "rules": {
+    "prettier": true,
+    "max-file-line-count": [true, 400],
+    "interface-name": [true, "never-prefix"]
+  },
+  "linterOptions": {
+    "exclude": ["**/*.js", "**/tmp/**/*", "**/.storybook/**/*"]
+  }
+}

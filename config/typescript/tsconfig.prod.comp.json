@@ -1,0 +1,15 @@
+{
+  "extends": "./tsconfig.prod",
+  "compilerOptions": {
+    "outDir": "../../packages/components/dist",
+    "rootDir": "../../packages/components/src"
+  },
+  "include": [
+    "../../packages/components/src/**/*.tsx",
+    "../../packages/components/src/**/*.ts"
+  ],
+  "exclude": [
+    "../../packages/components/src/**/*.test.tsx",
+    "../../packages/components/src/**/*.stories.tsx"
+  ]
+}
