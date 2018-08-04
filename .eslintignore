@@ -2,3 +2,4 @@
 docs/**/*.js
 tmp/**/*
 dist
+static

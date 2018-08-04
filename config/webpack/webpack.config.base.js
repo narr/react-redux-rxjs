@@ -94,6 +94,11 @@ function getProdWebpackPlugin() {
   return [
     new webpack.optimize.UglifyJsPlugin({
       sourceMap: true,
+      uglifyOptions: {
+        output: {
+          beautify: false,
+        },
+      },
     }),
     new webpack.optimize.ModuleConcatenationPlugin(),
   ];
