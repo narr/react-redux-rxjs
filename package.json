@@ -87,7 +87,7 @@
     "storybook": "start-storybook -p 9001 -c ./config/.storybook",
     "storybook:build": "build-storybook -c ./config/.storybook -o ./docs/storybook",
     "doc": "rimraf ./docs && npm run test:doc && npm run storybook:build",
-    "build:comp": "rimraf ./packages/components/dist && tsc -p ./config/typescript/tsconfig.prod.comp.json",
+    "build:comp": "rimraf ./packages/components/dist && tsc -p ./config/typescript/tsconfig.build.comp.json",
     "pub": "npm run build:comp && lerna publish --conventional-commits",
     "pub:test": "npm run pub -- --skip-git --skip-npm",
     "pub:ci": "npm run pub -- --yes",

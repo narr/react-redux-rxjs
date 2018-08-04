@@ -1,5 +1,5 @@
 {
-  "extends": "./tsconfig.prod",
+  "extends": "./tsconfig.build",
   "compilerOptions": {
     "outDir": "../../packages/components/dist",
     "rootDir": "../../packages/components/src"
