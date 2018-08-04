@@ -13,10 +13,10 @@
   },
   "homepage": "https://github.com/narr/react-redux-rxjs/tree/master/packages/components/README.md",
   "peerDependencies": {
-    "@material-ui/core": "^1.4.2",
-    "react": "^16.4.1",
-    "react-dom": "^16.4.1",
-    "styled-components": "^3.3.3"
+    "@material-ui/core": "^1.4.3",
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2",
+    "styled-components": "^3.4.0"
   },
   "main": "./dist"
 }
