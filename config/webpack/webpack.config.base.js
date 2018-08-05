@@ -31,7 +31,7 @@ function getEntry() {
       ? [
           // For IE 11, https://github.com/webpack-contrib/webpack-hot-middleware/issues/11
           'event-source-polyfill',
-          'webpack-hot-middleware/client',
+          'webpack-hot-middleware/client?reload=true',
         ]
       : [];
   return {
@@ -41,7 +41,11 @@ function getEntry() {
 }
 
 function getRules() {
-  const baseRuleForTs = {
+  return [getRuleTs(), getRuleImg()];
+}
+
+function getRuleTs() {
+  const rule = {
     test: /\.(ts|tsx)$/,
     use: [
       {
@@ -58,7 +62,7 @@ function getRules() {
   };
 
   if (webpackMode === DEV_MODE) {
-    baseRuleForTs.use = [
+    rule.use = [
       {
         loader: 'babel-loader',
         options: {
@@ -68,11 +72,24 @@ function getRules() {
           plugins: ['react-hot-loader/babel'],
         },
       },
-      ...baseRuleForTs.use,
+      ...rule.use,
     ];
   }
+  return rule;
+}
 
-  return [baseRuleForTs];
+function getRuleImg() {
+  const rule = {
+    test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
+    // default fallback is 'file-loader'
+    // https://github.com/webpack-contrib/url-loader#fallback
+    loader: 'url-loader',
+    options: {
+      limit: 10000,
+      name: 'media/[name].[hash:8].[ext]',
+    },
+  };
+  return rule;
 }
 
 function getPlugins({ extraPlugins = [] } = {}) {
@@ -122,6 +139,7 @@ function getBundleAnalyzerPlugin() {
 
 function getAlias() {
   return {
+    'proj-root': rootPath,
     'pkg-components': path.join(rootPath, './packages/components/src'),
     'shared-root': path.join(rootPath, './src/app/shared'),
   };

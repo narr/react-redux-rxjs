@@ -14,8 +14,13 @@ app.use(compression());
 // https://expressjs.com/en/api.html#express.json
 // app.use(express.json());
 app.use(morgan('dev'));
+// serve assets
+app.use(
+  '/react-redux-rxjs/assets',
+  express.static(path.join(__dirname, '../assets'))
+);
 // serve build files
-app.use('/static', express.static('static'));
+app.use('/static', express.static(path.join(__dirname, '../static')));
 // webpack
 const webpackConfigPath = path.join(
   __dirname,
