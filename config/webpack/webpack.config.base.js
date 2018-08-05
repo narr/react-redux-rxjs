@@ -26,8 +26,16 @@ function setMode(mode) {
 }
 
 function getEntry() {
+  const hmrEntry =
+    webpackMode === DEV_MODE
+      ? [
+          // For IE 11, https://github.com/webpack-contrib/webpack-hot-middleware/issues/11
+          'event-source-polyfill',
+          'webpack-hot-middleware/client',
+        ]
+      : [];
   return {
-    vendors: path.join(rootPath, './src/vendors.ts'),
+    vendors: hmrEntry.concat([path.join(rootPath, './src/vendors.ts')]),
     app: path.join(rootPath, './src/index.tsx'),
   };
 }
@@ -41,10 +49,7 @@ function getRules() {
         options: {
           configFile:
             webpackMode === DEV_MODE
-              ? path.join(
-                  rootPath,
-                  './config/typescript/tsconfig.webpack.dev.json'
-                )
+              ? path.join(rootPath, './config/typescript/tsconfig.webpack.json')
               : path.join(rootPath, './tsconfig.json'),
           transpileOnly: true,
         },
@@ -57,6 +62,8 @@ function getRules() {
       {
         loader: 'babel-loader',
         options: {
+          presets: ['react-app'],
+          cacheDirectory: true,
           babelrc: false,
           plugins: ['react-hot-loader/babel'],
         },

@@ -6,9 +6,6 @@ baseConfig.setMode(mode);
 
 function webpackConfig() {
   const config = {
-    devServer: {
-      hot: true,
-    },
     devtool: 'cheap-module-source-map',
     entry: baseConfig.getEntry(),
     module: {

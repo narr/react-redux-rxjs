@@ -2,6 +2,7 @@
   "compilerOptions": {
     "module": "commonjs",
     "target": "es5",
+    "lib": ["dom", "scripthost", "es6", "dom.iterable"],
     "sourceMap": true,
     "allowJs": true,
     "jsx": "react",
