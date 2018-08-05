@@ -72,7 +72,7 @@ BRF:4
 BRH:4
 end_of_record
 TN:
-SF:C:\narr\programming\project\react-redux-rxjs\packages\components\src\Theme\dark.tsx
+SF:C:\narr\programming\project\react-redux-rxjs\packages\components\src\Theme\dark.ts
 FNF:0
 FNH:0
 DA:1,1
@@ -85,7 +85,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:C:\narr\programming\project\react-redux-rxjs\packages\components\src\Theme\index.tsx
+SF:C:\narr\programming\project\react-redux-rxjs\packages\components\src\Theme\index.ts
 FNF:0
 FNH:0
 DA:1,1
@@ -97,7 +97,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:C:\narr\programming\project\react-redux-rxjs\packages\components\src\Theme\light.tsx
+SF:C:\narr\programming\project\react-redux-rxjs\packages\components\src\Theme\light.ts
 FNF:0
 FNH:0
 DA:1,1

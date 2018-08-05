@@ -342,8 +342,8 @@
     "f": { "0": 2, "1": 2 },
     "b": { "0": [1, 1], "1": [2, 1] }
   },
-  "C:\\narr\\programming\\project\\react-redux-rxjs\\packages\\components\\src\\Theme\\dark.tsx": {
-    "path": "C:\\narr\\programming\\project\\react-redux-rxjs\\packages\\components\\src\\Theme\\dark.tsx",
+  "C:\\narr\\programming\\project\\react-redux-rxjs\\packages\\components\\src\\Theme\\dark.ts": {
+    "path": "C:\\narr\\programming\\project\\react-redux-rxjs\\packages\\components\\src\\Theme\\dark.ts",
     "statementMap": {
       "0": {
         "start": { "line": 1, "column": 0 },
@@ -368,8 +368,8 @@
     "f": {},
     "b": {}
   },
-  "C:\\narr\\programming\\project\\react-redux-rxjs\\packages\\components\\src\\Theme\\index.tsx": {
-    "path": "C:\\narr\\programming\\project\\react-redux-rxjs\\packages\\components\\src\\Theme\\index.tsx",
+  "C:\\narr\\programming\\project\\react-redux-rxjs\\packages\\components\\src\\Theme\\index.ts": {
+    "path": "C:\\narr\\programming\\project\\react-redux-rxjs\\packages\\components\\src\\Theme\\index.ts",
     "statementMap": {
       "0": {
         "start": { "line": 1, "column": 0 },
@@ -390,8 +390,8 @@
     "f": {},
     "b": {}
   },
-  "C:\\narr\\programming\\project\\react-redux-rxjs\\packages\\components\\src\\Theme\\light.tsx": {
-    "path": "C:\\narr\\programming\\project\\react-redux-rxjs\\packages\\components\\src\\Theme\\light.tsx",
+  "C:\\narr\\programming\\project\\react-redux-rxjs\\packages\\components\\src\\Theme\\light.ts": {
+    "path": "C:\\narr\\programming\\project\\react-redux-rxjs\\packages\\components\\src\\Theme\\light.ts",
     "statementMap": {
       "0": {
         "start": { "line": 1, "column": 0 },
