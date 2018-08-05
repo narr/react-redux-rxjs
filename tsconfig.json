@@ -18,7 +18,10 @@
     "skipLibCheck": true,
     "baseUrl": "./",
     "paths": {
-      "pkg-components/*": ["./packages/components/src/*"]
+      "proj-root/*": ["./*"],
+      "pkg-components/*": ["./packages/components/src/*"],
+      "shared-root/*": ["./src/app/shared/*"]
     }
-  }
+  },
+  "exclude": ["**/dist"]
 }
