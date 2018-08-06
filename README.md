@@ -6,6 +6,9 @@ My boilerplate code for React + Redux + RxJs
 
 ```sh
 npm i
+
+# For CI
+npm i --no-optional
 ```
 
 ## Development
