@@ -3,15 +3,11 @@ import { ThemeOptions } from '@material-ui/core/styles/createMuiTheme';
 import * as PropTypes from 'prop-types';
 import * as React from 'react';
 
-interface ClassesProp {
-  /** Material UI classes */
+interface TestButtonBaseProps {
   classes: {
     root: string;
+    [key: string]: any;
   };
-}
-
-interface TestButtonBaseProps {
-  classes?: { [key: string]: any };
   // add a comment below to show it in Prop Types in Storybook
   // but currently it doesn't work well with 'withStyles'
   /** Browser Tooltip  */
@@ -48,20 +44,23 @@ const styles = (theme: ThemeOptions) => {
 };
 
 // React.SFC is alias of React.StatelessComponent
-const ClassNames: React.SFC<ClassesProp> = ({ classes, ...otherProps }) => {
+const ClassNames: React.SFC<TestButtonBaseProps> = ({
+  classes,
+  ...otherProps
+}) => {
   return <button type="button" className={classes.root} {...otherProps} />;
 };
 // FIXME: with 'withStyles' Prop Types in Storybook are not correctly generated.
 // to provide the theme object to the component as a property, pass { withTheme: true }
 // https://material-ui.com/customization/css-in-js/#withstyles-styles-options-higher-order-component
-const TestButtonBase = withStyles(styles)<TestButtonBaseProps>(ClassNames);
+const TestButtonBase = withStyles(styles)(ClassNames);
 
 // This is requried to show wanrings for Props in a compiled js version of this component.
 TestButtonBase.propTypes = {
   classes: PropTypes.objectOf(PropTypes.string),
   onClick: PropTypes.func.isRequired,
   title: PropTypes.string,
-};
+} as any;
 
 TestButtonBase.defaultProps = {
   title: 'this is a default browser tooltip',
