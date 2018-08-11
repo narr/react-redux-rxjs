@@ -1,3 +1,4 @@
-import commonStyle from './commonStyle';
+export { default as commonStyle } from './commonStyle';
 
-export { commonStyle };
+export * from './appReducer';
+export { default as appReducer } from './appReducer';

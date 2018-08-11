@@ -2,19 +2,15 @@
 
 import '@material-ui/core/Button';
 import '@material-ui/core/styles';
-import 'lodash';
 import * as objectAssign from 'object-assign';
 import 'prop-types';
 import 'react';
 import 'react-dom';
 import 'react-hot-loader';
+import 'react-redux';
+import 'redux';
+import 'redux-devtools-extension/developmentOnly';
 import 'styled-components';
-
-declare global {
-  interface Window {
-    Promise: Promise<any>;
-  }
-}
 
 // @ For IE 11
 if (typeof Promise === 'undefined') {

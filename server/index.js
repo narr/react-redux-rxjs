@@ -35,6 +35,7 @@ app.use(
 );
 app.use(webpackHotMiddleware(webpackCompiler));
 
-app.listen(3000, () =>
-  console.log('Development server started at port 3000..!!')
+const port = 8080;
+app.listen(port, () =>
+  console.log(`Development server started at port ${port}..!!`)
 );
