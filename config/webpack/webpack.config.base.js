@@ -99,7 +99,9 @@ function getPlugins({ extraPlugins = [] } = {}) {
       names: ['vendors'],
     }),
     getHtmlWebpackPlugin(),
-    new ForkTsCheckerWebpackPlugin(),
+    new ForkTsCheckerWebpackPlugin({
+      async: false,
+    }),
     getBundleAnalyzerPlugin(),
   ]
     .concat(extraPlugins)

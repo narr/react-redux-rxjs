@@ -29,6 +29,46 @@
       url("/react-redux-rxjs/assets/font/Material-Icons/MaterialIcons-Regular.ttf") format("truetype");
     }
 
+    @keyframes init-progress-circular-rotate {
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes init-progress-circular-dash {
+      0% {
+        stroke-dasharray: 1px, 200px;
+        stroke-dashoffset: 0px;
+      }
+      50% {
+        stroke-dasharray: 100px, 200px;
+        stroke-dashoffset: -15px;
+      }
+      100% {
+        stroke-dasharray: 100px, 200px;
+        stroke-dashoffset: -120px;
+      }
+    }
+
+    .init-spinner {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      margin-left: -100px;
+      margin-top: -100px;
+      width: 200px;
+      height: 200px;
+      color: #2196f3;
+      animation: init-progress-circular-rotate 1.4s linear infinite;
+    }
+
+    .init-spinner__circle {
+      stroke: currentColor;
+      stroke-dasharray: 80px, 200px;
+      stroke-dashoffset: 0;
+      animation: init-progress-circular-dash 1.4s ease-in-out infinite;
+    }
+
     #root {
       height: 100%;
     }
@@ -39,6 +79,12 @@
   <noscript>
     You need to enable JavaScript to run this app.
   </noscript>
+  <div class="init-spinner">
+    <svg viewBox="22 22 44 44">
+      <circle class="init-spinner__circle" cx="44" cy="44" r="18" stroke-width="4" fill="none">
+      </circle>
+    </svg>
+  </div>
   <div id="root"></div>
 </body>
 

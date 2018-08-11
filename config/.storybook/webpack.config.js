@@ -47,6 +47,7 @@ module.exports = (baseConfig, env, defaultConfig) => {
   defaultConfig.resolve.extensions.push('.ts', '.tsx');
   defaultConfig.plugins.push(
     new ForkTsCheckerWebpackPlugin({
+      async: false,
       watch: includePath,
     })
   );

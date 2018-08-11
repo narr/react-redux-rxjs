@@ -9,6 +9,10 @@ module.exports = ({
       '^.+\\.tsx?$': 'ts-jest',
     },
     moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
+    moduleNameMapper: {
+      '^pkg-components(.*?)$': '<rootDir>/packages/components/src$1',
+      '^shared-root(.*?)$': '<rootDir>/src/app/shared$1',
+    },
     modulePathIgnorePatterns: ['<rootDir>/tmp'],
     watchPathIgnorePatterns: ['.*?\\.jsx?$'],
     globals: {
@@ -16,6 +20,15 @@ module.exports = ({
         tsConfigFile: './tsconfig.json',
       },
     },
+    collectCoverageFrom: [
+      '!**/*.stories.tsx',
+      '!**/index.{ts,tsx}',
+      '!**/src/vendors.ts',
+      '!**/src/reducers.ts',
+      '!**/src/app/App.tsx',
+      'packages/**/src/**/*.{ts,tsx}',
+      'src/**/*.{ts,tsx}',
+    ],
     coverageDirectory,
     coverageThreshold: {
       global: {

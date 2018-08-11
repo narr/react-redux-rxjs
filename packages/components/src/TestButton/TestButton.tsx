@@ -59,7 +59,7 @@ TestButton.propTypes = {
   className: PropTypes.string,
   classes: PropTypes.objectOf(PropTypes.string),
   onClick: PropTypes.func.isRequired,
-};
+} as any;
 
 TestButton.defaultProps = {
   bg: '#ffa',
