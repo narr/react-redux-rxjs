@@ -6,6 +6,7 @@ import * as React from 'react';
 interface TestButtonBaseProps {
   classes: {
     root: string;
+    'root--big': string;
     [key: string]: any;
   };
   // add a comment below to show it in Prop Types in Storybook
@@ -40,6 +41,9 @@ const styles = (theme: ThemeOptions) => {
         color: 'black',
       },
     },
+    'root--big': {
+      padding: '0 50px',
+    },
   };
 };
 
@@ -48,7 +52,13 @@ const ClassNames: React.SFC<TestButtonBaseProps> = ({
   classes,
   ...otherProps
 }) => {
-  return <button type="button" className={classes.root} {...otherProps} />;
+  return (
+    <button
+      type="button"
+      className={[classes.root, classes['root--big']].join(' ')}
+      {...otherProps}
+    />
+  );
 };
 // FIXME: with 'withStyles' Prop Types in Storybook are not correctly generated.
 // to provide the theme object to the component as a property, pass { withTheme: true }
