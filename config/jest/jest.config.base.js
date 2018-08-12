@@ -13,7 +13,7 @@ module.exports = ({
       '^pkg-components(.*?)$': '<rootDir>/packages/components/src$1',
       '^shared-root(.*?)$': '<rootDir>/src/app/shared$1',
     },
-    modulePathIgnorePatterns: ['<rootDir>/tmp'],
+    modulePathIgnorePatterns: ['<rootDir>/tmp', '<rootDir>/.history'],
     watchPathIgnorePatterns: ['.*?\\.jsx?$'],
     globals: {
       'ts-jest': {
@@ -25,6 +25,7 @@ module.exports = ({
       '!**/index.{ts,tsx}',
       '!**/src/vendors.ts',
       '!**/src/reducers.ts',
+      '!**/src/ducks.ts',
       '!**/src/app/App.tsx',
       'packages/**/src/**/*.{ts,tsx}',
       'src/**/*.{ts,tsx}',

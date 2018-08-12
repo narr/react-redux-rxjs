@@ -1,11 +1,12 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
 
-import { appLoaded, IappState, TypeAppLoaded } from '../shared';
+import { loadInitData } from '../shared';
 
 interface RootProps {
-  appLoaded: TypeAppLoaded;
-  appState: IappState;
+  appLoaded: boolean;
+  onInit: () => void;
   initSpinnerSelector: string;
 }
 
@@ -15,9 +16,7 @@ class RootContainer extends React.Component<RootProps> {
   }
 
   public componentDidMount() {
-    setTimeout(() => {
-      this.props.appLoaded();
-    }, 2000);
+    this.props.onInit();
   }
 
   public componentDidUpdate(prevProps: RootProps) {
@@ -41,23 +40,34 @@ class RootContainer extends React.Component<RootProps> {
     }
     return (
       <React.Fragment>
-        {this.props.appState.loaded && <span>This app is ready</span>}
+        {this.props.appLoaded && (
+          <span onClick={this.onClickReadyText}>This app is ready</span>
+        )}
       </React.Fragment>
     );
   }
 
   private isAppLoaded = (prevProps: RootProps) => {
-    return !prevProps.appState.loaded && this.props.appState.loaded;
+    return !prevProps.appLoaded && this.props.appLoaded;
+  };
+
+  private onClickReadyText = (e: React.MouseEvent) => {
+    // tslint:disable-next-line no-console
+    console.log(e.target);
   };
 }
 
-const mapStateToProps = (state: RootProps) => ({
-  appState: state.appState,
-});
-
-const mapDispatchToProps = {
-  appLoaded,
+const mapStateToProps = (state: RootProps, props: any) => {
+  return {
+    appLoaded: state.appLoaded,
+  };
 };
+
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+  onInit: () => {
+    dispatch(loadInitData());
+  },
+});
 
 export default connect(
   mapStateToProps,

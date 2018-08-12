@@ -10,6 +10,10 @@ import 'react-hot-loader';
 import 'react-redux';
 import 'redux';
 import 'redux-devtools-extension/developmentOnly';
+import 'redux-observable';
+import 'rxjs';
+import 'rxjs/ajax';
+import 'rxjs/operators';
 import 'styled-components';
 
 // @ For IE 11
