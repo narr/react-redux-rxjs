@@ -1,12 +1,14 @@
 import { mount } from 'enzyme';
+import * as nock from 'nock';
 import * as React from 'react';
 import { Provider } from 'react-redux';
 import configureStore, { MockStoreEnhanced } from 'redux-mock-store';
-import { appLoaded, appReducer } from 'shared-root/index';
+import { createEpicMiddleware } from 'redux-observable';
+import { apiContextPath, APP_LOADED, loadInitData } from 'shared-root/index';
+import { rootEpic } from '../../ducks';
 import RootContainer from './RootContainer';
 
 describe('<RootContainer />', () => {
-  const mockStore = configureStore();
   let store: MockStoreEnhanced;
 
   beforeEach(() => {
@@ -14,28 +16,39 @@ describe('<RootContainer />', () => {
       <div class="spinner"></div>
     `;
 
-    jest.useFakeTimers();
+    const epicMiddleware = createEpicMiddleware();
+    const mockStore = configureStore([epicMiddleware]);
 
-    let lastState = {
-      loaded: false,
-    };
     store = mockStore((actions: any[]) => {
       let nextState;
       const lastAction = actions[actions.length - 1];
-      if (lastAction) {
-        nextState = appReducer(lastState, lastAction);
+      if (lastAction && lastAction.type === APP_LOADED) {
+        nextState = {
+          appLoaded: true,
+          phones: lastAction.payload.phones,
+          selectedPhone: lastAction.payload.selectedPhone,
+        };
       } else {
-        nextState = appReducer(undefined, { type: '' });
+        nextState = { appLoaded: false };
       }
-      lastState = nextState;
-      return {
-        appState: nextState,
-      };
+      return nextState;
     });
+    epicMiddleware.run(rootEpic);
     jest.spyOn(store, 'dispatch');
   });
 
-  it('should stop the init spinner when the app is loaded', () => {
+  afterEach(() => {
+    nock.cleanAll();
+  });
+
+  it('should stop the init spinner when the app is loaded', done => {
+    nock('http://localhost')
+      .get(`${apiContextPath}/assets/json/phones/motorola-xoom-with-wi-fi.json`)
+      .reply(200, { value1: 12 });
+    nock('http://localhost')
+      .get(`${apiContextPath}/assets/json/phones/phones.json`)
+      .reply(200, { value2: 34 });
+
     const spinnerElName = 'spinner';
     const spinnerElSelector = `.${spinnerElName}`;
 
@@ -44,12 +57,16 @@ describe('<RootContainer />', () => {
         <RootContainer initSpinnerSelector={spinnerElSelector} />
       </Provider>
     );
-    jest.runOnlyPendingTimers();
-    expect(store.dispatch).toHaveBeenCalledWith(appLoaded());
 
-    const spinnerEl = document.querySelector(spinnerElSelector) as HTMLElement;
-    const isSpinnerElHidden = spinnerEl.style.display === 'none';
-    expect(isSpinnerElHidden).toBe(true);
+    setTimeout(() => {
+      expect(store.dispatch).toHaveBeenCalledWith(loadInitData());
+      const spinnerEl = document.querySelector(
+        spinnerElSelector
+      ) as HTMLElement;
+      const isSpinnerElHidden = spinnerEl.style.display === 'none';
+      expect(isSpinnerElHidden).toBe(true);
+      done();
+    }, 1000);
   });
 
   it('should not stop the init spinner when a wrong selector is provided', () => {
@@ -61,7 +78,6 @@ describe('<RootContainer />', () => {
         <RootContainer initSpinnerSelector={spinnerElSelector + '-test'} />
       </Provider>
     );
-    jest.runOnlyPendingTimers();
 
     const spinnerEl = document.querySelector(spinnerElSelector) as HTMLElement;
     const isSpinnerElHidden = spinnerEl.style.display === 'none';

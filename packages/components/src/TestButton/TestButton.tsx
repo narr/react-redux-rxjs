@@ -48,6 +48,7 @@ const ClassesNesting: React.SFC<ClassesProp> = ({
 };
 const WithStyleButton = withStyles(styles)(ClassesNesting);
 
+// https://material-ui.com/customization/themes/#accessing-the-theme-in-a-component
 const TestButton = styled(WithStyleButton)<TestButtonProps>`
   && {
     background: ${props => props.bg};
